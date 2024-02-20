@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@fontsource/be-vietnam-pro';
+@import '@fontsource/be-vietnam-pro/700.css';
+@import '@fontsource-variable/comfortaa';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
