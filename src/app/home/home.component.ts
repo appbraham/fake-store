@@ -7,19 +7,20 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ChipComponent } from "../chip/chip.component";
 import { CardProductComponent } from "../card-product/card-product.component";
+import { SearchProductComponent } from "../search-product/search-product.component";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  templateUrl: './home.component.html',
-  imports: [RouterOutlet, ReactiveFormsModule, StarComponent, ChipComponent, CardProductComponent]
+    selector: 'app-home',
+    standalone: true,
+    templateUrl: './home.component.html',
+    imports: [RouterOutlet, ReactiveFormsModule, StarComponent, ChipComponent, CardProductComponent, SearchProductComponent]
 })
-export class HomeComponent implements OnInit, OnChanges {
+export class HomeComponent implements OnInit {
 
   products: Product[] = [];
   filteredProducts: Product[] = [];
   limit: number = 20;
-  order: string = 'desc';
+  order: string = 'ASC';
 
   textSearchFC = new FormControl('');
 
@@ -36,27 +37,10 @@ export class HomeComponent implements OnInit, OnChanges {
 
     this.filteredProducts = this.products;
 
-    this.textSearchFC.valueChanges.pipe(debounceTime(1000)).subscribe((res) => this.searchProduct(res));
-
     this.productService.getAllCategories().subscribe(
       category => this.categories.push('all', ...Object.values(category))
     );
 
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
-
-  searchProduct(nameProduct: string | null = null) {
-
-    if (!nameProduct) {
-      this.products = this.filteredProducts;
-    }
-
-    this.products = this.products.filter(
-      (product) => product.title.toLowerCase().includes(nameProduct!.toLowerCase())
-    );
   }
 
   getSelectedCategory(categoryName: string) {
@@ -68,12 +52,15 @@ export class HomeComponent implements OnInit, OnChanges {
       console.log('all selected');
 
     } else {
-
       this.productService.getProductsByCategory(categoryName, this.limit, this.order)
           .subscribe( product => {
             this.products.push(...product);
-            console.log(product);
       });
     }
   }
+
+  searchedProduct($event:Product[]){
+    this.products = $event;
+  }
+
 }
