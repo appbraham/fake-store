@@ -8,12 +8,13 @@ import { debounceTime } from 'rxjs';
 import { ChipComponent } from "../chip/chip.component";
 import { CardProductComponent } from "../card-product/card-product.component";
 import { SearchProductComponent } from "../search-product/search-product.component";
+import { ImagePlaceholderComponent } from "../image-placeholder/image-placeholder.component";
 
 @Component({
     selector: 'app-home',
     standalone: true,
     templateUrl: './home.component.html',
-    imports: [RouterOutlet, ReactiveFormsModule, StarComponent, ChipComponent, CardProductComponent, SearchProductComponent]
+    imports: [RouterOutlet, ReactiveFormsModule, StarComponent, ChipComponent, CardProductComponent, SearchProductComponent, ImagePlaceholderComponent]
 })
 export class HomeComponent implements OnInit {
 
@@ -26,8 +27,7 @@ export class HomeComponent implements OnInit {
 
   categories: string[] = [];
 
-  // productService:ProductService = inject(ProductService);
-  constructor(private productService: ProductService) { }
+  productService:ProductService = inject(ProductService);
 
   ngOnInit(): void {
 
@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
 
     if (categoryName === 'all') {
       this.products = this.filteredProducts;
-      console.log('all selected');
 
     } else {
       this.productService.getProductsByCategory(categoryName, this.limit, this.order)

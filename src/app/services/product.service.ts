@@ -20,6 +20,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.url}/products`, { params });
   }
 
+  getProductById(id: number){
+    return this.http.get<Product>(`${this.url}/products/${id}`);
+  }
+
   getAllCategories(){
     return this.http.get<Category>(`${this.url}/products/categories`);
   }

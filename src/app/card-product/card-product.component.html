@@ -1,10 +1,15 @@
 <article class="bg-white rounded-3xl overflow-hidden p-6 shadow-md">
-  <img class="object-cover mx-auto max-h-[200px] transition-transform duration-300 hover:scale-110" [src]="product.image" alt="product.title">
+
+  <a [routerLink]="['/product', product.id]" routerLinkActive="router-link-active">
+    <img class="object-cover mx-auto max-h-[200px] transition-transform duration-300 hover:scale-110" [src]="product.image" alt="product.title">
+  </a>
   <div class="flex flex-col gap-1 pt-4">
-    <h2 class="font-comfortaa font-bold text-lg text-darky text-balance">{{product.title}}</h2>
+    <a [routerLink]="['/product', product.id]" routerLinkActive="router-link-active">
+      <h2 class="font-comfortaa font-bold text-lg text-darky text-balance">{{product.title}}</h2>
+    </a>
     <div class="flex items-center gap-2">
       <app-star [value] = "product.rating.rate" />
-      <span class="text-darky text-sm font-medium pt-px">{{product.rating.rate}}</span>
+      <span class="text-darky text-sm font-medium pt-px">{{product.rating.count}}</span>
     </div>
     <span class="text-lg font-bold text-primary my-2">$ {{product.price}}</span>
     <button class="group flex gap-2 justify-center items-center bg-primary text-white mt-4 py-2 rounded-full hover:bg-secondary" type="button">
