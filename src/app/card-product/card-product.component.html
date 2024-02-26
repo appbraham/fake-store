@@ -1,7 +1,7 @@
 <article class="bg-white rounded-3xl overflow-hidden p-6 shadow-md">
 
   <a [routerLink]="['/product', product.id]" routerLinkActive="router-link-active">
-    <img class="object-cover mx-auto max-h-[200px] transition-transform duration-300 hover:scale-110" [src]="product.image" alt="product.title">
+    <img loading="lazy" class="aspect-square object-contain mx-auto max-h-[200px] transition-transform duration-300 hover:scale-110" [src]="product.image" alt="product.title">
   </a>
   <div class="flex flex-col gap-1 pt-4">
     <a [routerLink]="['/product', product.id]" routerLinkActive="router-link-active">
